@@ -1,0 +1,8 @@
+# ALL THE CRON JOBS WHICH HAS TO BE SCHEDULED VIA SIDEKIQ GOES HERE
+
+
+property_billing_reminder_email:
+  cron: "0 0 * * *"
+  class: "PropertyDueReminderJob"
+  queue: default
+

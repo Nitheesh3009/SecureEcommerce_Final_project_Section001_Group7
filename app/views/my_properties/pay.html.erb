@@ -1,0 +1,52 @@
+<%= render "my_properties/my_property" %>
+<div id="paypal-button-container"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AemRRc0VGYtVYQUOWKeNRB5oQ6CU5YAepyQ-DDUk1aHimWuveA9F98l7FYhZdaB28DfxOAjz5V3LPGnD" ></script>
+
+
+<script>
+    $(document).ready(function() {
+        paypal.Buttons({
+            style: {
+                layout:  'horizontal',
+                color:   'blue',
+                shape:   'rect',
+                label:   'paypal'
+            } ,
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        reference_id: <%= @user_property.id %>,
+                        amount: {
+                            value: <%= @user_property.property.rent_amount.to_i  %>,
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    console.log(details)
+
+
+                    if(details.status == "COMPLETED") {
+                        $.ajax({
+                            url: '/my_properties/<%= @user_property.id %>/create_pay',
+                            method: 'GET',
+                            data: {order_id: details.id},
+                            dataType: "script"
+                        });
+                    }
+                });
+            }
+        }).render('#paypal-button-container'); // Display payment options on your web page
+    });
+
+    $(document).ready(function(){
+        // Enable/disable stripe button
+
+        $('#checkoutButton').on('click', function(e) {
+            e.preventDefault();
+            // Open Checkout with further options
+            $('#buttons-container').click();
+        });
+    })
+</script>

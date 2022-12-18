@@ -1,0 +1,22 @@
+<div class="row">
+  <% @properties.each do |property| %>
+    <div class="col-md-6">
+      <div class="card">
+        <% if property.images.attached? %>
+          <%= image_tag property.images.first, class: "card-img-top", style: "width: 100%; height: 300px;" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= property.name %></h5>
+          <p class="card-text">
+            <div class="row">
+              <div class="col-md-3"><strong>Rent Amount</strong></div>
+              <div class="col-md-8"><%= property.rent_amount %></div>
+            </div>
+
+          <a href="/properties/<%= property.id %>" class="btn btn-outline-primary mt-3">View</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

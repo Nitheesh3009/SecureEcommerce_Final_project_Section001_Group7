@@ -1,0 +1,161 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Property Details</h5>
+
+        <!-- Slides with captions -->
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <% if @property.images.attached? %>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
+              <% @property.images.each_with_index do |image, index| %>
+                <% if index > 0 %>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%= index %>" aria-label="Slide <%= index + 1 %>" class=""></button>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="carousel-inner">
+            <% if @property.images.attached? %>
+              <% @property.images.each_with_index do |image, index| %>
+                <% if index == 0 %>
+                  <div class="carousel-item active">
+                    <%= image_tag image, style: "width: 100%; height: 10%px;" %>
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5><%= @property.name %></h5>
+                      <p><%= @property.description %></p>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="carousel-item">
+                    <%= image_tag image, style: "width: 100%; height: 10%px;" %>
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5><%= @property.name %></h5>
+                      <p><%= @property.description %></p>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+
+        </div><!-- End Slides with captions -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-body">
+
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <strong>
+          Name
+        </strong>
+      </div>
+      <div class="col-md-10">
+        <%= @property.name %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <strong>
+          Description
+        </strong>
+      </div>
+      <div class="col-md-10">
+        <%= @property.description %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <strong>
+          Address
+        </strong>
+      </div>
+      <div class="col-md-10">
+        <%= @property.address %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <strong>
+          Owner name
+        </strong>
+      </div>
+      <div class="col-md-10">
+        <%= @property.owner_name %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <strong>
+          Owner address
+        </strong>
+      </div>
+      <div class="col-md-10">
+        <%= @property.owner_address %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <strong>
+          Owner phone number
+        </strong>
+      </div>
+      <div class="col-md-10">
+        <%= @property.owner_phone_number %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <strong>
+          Rent amount
+        </strong>
+      </div>
+      <div class="col-md-10">
+        <%= @property.rent_amount %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <strong>
+          Rent payment in days
+        </strong>
+      </div>
+      <div class="col-md-10">
+        <%= @property.rent_payment_days %>
+      </div>
+    </div>
+
+
+
+    <% if action_name == "show" %>
+      <a data-turbo="false" href="/properties/<%= @property.id %>/buy" class="btn btn-sm btn-outline-primary mt-3">Rent this property</a>
+    <% end %>
+
+    <a href="/properties" class="btn btn-sm btn-outline-primary mt-3 " style="margin-left: 5px;">Back</a>
+
+  </div>
+</div>
+

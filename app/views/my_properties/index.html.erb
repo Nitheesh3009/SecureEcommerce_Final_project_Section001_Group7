@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">My Properties</h5>
+
+    <!-- Default Table -->
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Rent amount</th>
+        <th scope="col">Owner Name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Next Billing date</th>
+        <th scope="col" colspan="2">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @user_properties.each do |user_property| %>
+        <tr>
+          <th scope="row"><%= user_property.property.name %></th>
+          <td><%= user_property.property.address %></td>
+          <td><%= user_property.property.rent_amount %></td>
+          <td><%= user_property.property.owner_name %></td>
+          <td><%= user_property.status %></td>
+          <td><%= user_property.next_billing_date %></td>
+          <td>
+            <%= link_to "show", my_property_path(user_property), class: "btn btn-sm btn-outline-info" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

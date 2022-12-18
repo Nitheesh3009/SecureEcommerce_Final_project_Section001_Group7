@@ -1,0 +1,9 @@
+<%= render "my_properties/my_property" %>
+
+<% if Date.current >= @user_property.next_billing_date %>
+  <a href="/my_properties/<%= @user_property.id %>/pay" class="btn btn-outline-primary">Pay</a>
+<% end %>
+
+<% if @user_property.in_progress? %>
+  <a href="/my_properties/<%= @user_property.id %>/cancel" class="btn btn-outline-danger mt-3">Cancel Rent</a>
+<% end %>
